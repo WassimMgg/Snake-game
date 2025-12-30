@@ -38,3 +38,21 @@ class Snake:
     def left(self):
         if self.head.heading() != 0:
             self.head.setheading(180)
+
+    def extend_tail(self):
+        tail_tall = len(self.segments) - 1
+        tail_x_positions = self.segments[tail_tall].xcor()
+        tail_y_positions = self.segments[tail_tall].ycor()
+        new_segment  = Turtle("square")
+        new_segment.color("white")
+        new_segment.penup()
+        if self.segments[tail_tall].heading() == 180:
+            new_segment.goto(x = tail_x_positions + 20, y = tail_y_positions)
+        elif self.segments[tail_tall].heading() == 0:
+            new_segment.goto(x = tail_x_positions - 20, y = tail_y_positions)
+        elif self.segments[tail_tall].heading() == 270:
+            new_segment.goto(x = tail_x_positions, y = tail_y_positions + 20)
+        else:
+            new_segment.goto(x = tail_x_positions, y = tail_y_positions - 20)
+        self.segments.append(new_segment)
+
